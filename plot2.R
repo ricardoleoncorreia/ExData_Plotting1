@@ -13,7 +13,7 @@ png(filename = "plot2.png", width = 480, height = 480)
 plot(data$Datetime,
      global_active_power,
      xlab = "",
-     ylab = "Global Active power (kilowatts)",
+     ylab = "Global Active Power (kilowatts)",
      type = "l")
 
 dev.off()
