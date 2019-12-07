@@ -1,6 +1,6 @@
 url <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
 
-download_data <- function() {
+download_data <- function(columns) {
     temp <- tempfile()
     
     download.file(url, temp)
@@ -13,5 +13,5 @@ download_data <- function() {
     unlink(temp)
     
     desired_range <- data$Date == '1/2/2007' | data$Date == '2/2/2007'
-    data[desired_range,]
+    data[desired_range, columns]
 }
