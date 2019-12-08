@@ -2,12 +2,11 @@ source('utils.R')
 library(dplyr)
 
 important_columns <- c("Date", "Time", "Global_active_power")
-data <- download_data(columns = important_columns)
+data <- get_data(columns = important_columns)
 
 current.data <- data %>%
-                mutate(Datetime = paste(Date, Time, sep = " ")) %>%
-                mutate(Datetime = as.POSIXct(strptime(Datetime, format = "%d/%m/%Y %H:%M:%S"))) %>%
-                mutate(Global_active_power = as.numeric(Global_active_power))
+                mutate(Datetime = as.POSIXct(strptime(paste(Date, Time, sep = " "), format = "%Y-%m-%d %H:%M:%S")),
+                       Global_active_power = as.numeric(Global_active_power))
 
 png(filename = "plot2.png", width = 480, height = 480)
 

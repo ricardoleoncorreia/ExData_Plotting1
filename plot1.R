@@ -1,7 +1,7 @@
 source('utils.R')
 
-important_columns <- c("Date", "Time", "Global_active_power")
-data <- download_data(columns = important_columns)
+important_columns <- c("Global_active_power")
+data <- get_data(columns = important_columns)
 
 global_active_power <- sapply(data$Global_active_power, as.numeric)
 

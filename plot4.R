@@ -1,17 +1,17 @@
 source('utils.R')
 library(dplyr)
 
-data <- download_data()
+important_columns <- c("Date", "Time", "Sub_metering_1", "Sub_metering_2", "Sub_metering_3", "Global_active_power", "Global_reactive_power", "Voltage")
+data <- get_data(columns = important_columns)
 
 current.data <- data %>%
-                mutate(Datetime = paste(Date, Time, sep = " ")) %>%
-                mutate(Datetime = as.POSIXct(strptime(Datetime, format = "%d/%m/%Y %H:%M:%S"))) %>%
-                mutate(Sub_metering_1 = as.numeric(Sub_metering_1)) %>%
-                mutate(Sub_metering_2 = as.numeric(Sub_metering_2)) %>%
-                mutate(Sub_metering_3 = as.numeric(Sub_metering_3)) %>%
-                mutate(Global_active_power = as.numeric(Global_active_power)) %>%
-                mutate(Global_reactive_power = as.numeric(Global_reactive_power)) %>%
-                mutate(Voltage = as.numeric(Voltage))
+                mutate(Datetime = as.POSIXct(strptime(paste(Date, Time, sep = " "), format = "%Y-%m-%d %H:%M:%S")),
+                       Sub_metering_1 = as.numeric(Sub_metering_1),
+                       Sub_metering_2 = as.numeric(Sub_metering_2),
+                       Sub_metering_3 = as.numeric(Sub_metering_3),
+                       Global_active_power = as.numeric(Global_active_power),
+                       Global_reactive_power = as.numeric(Global_reactive_power),
+                       Voltage = as.numeric(Voltage))
 
 png(filename = "plot4.png", width = 480, height = 480)
 
